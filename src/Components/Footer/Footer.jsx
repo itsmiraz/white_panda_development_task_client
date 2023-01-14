@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
     return (
-        <footer className='px-20  text-slate-800 font-semibold'>
+        <footer className='px-4 md:px-20  text-slate-800 font-semibold'>
             <h1 className='font-bold text-xl'>Rent V Room</h1>
             <p>
                 RentVrooom Private ltd.
@@ -14,7 +14,7 @@ const Footer = () => {
                 Bengaluru, Karnataka 560034
             </p>
 
-            <div className='flex my-4 text-slate-500 items-center justify-between '>
+            <div className='flex md:flex-row flex-col my-4 text-slate-500 items-center justify-between '>
                 <div>
                     <Link className='mr-4'>
                         Home

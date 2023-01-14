@@ -2,14 +2,14 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 const CarCard = ({ car }) => {
 
-    const { img, title, rent_price, color, seater ,_id} = car
+    const { img, title, rent_price, color, seater, _id, available } = car
 
 
     return (
-        <div className='my-8 flex  justify-between px-20 items-center'>
+        <div className='mb-8 flex  justify-between px-4 md:flex-row flex-col md:px-20 items-center'>
 
 
-            <div className='flex items-center gap-x-8'>
+            <div className='flex items-center md:flex-row flex-col  gap-x-8'>
                 <img src={img} alt="" className='w-60' />
                 <div>
                     <h1 className='font-semibold text-xl'>{title}</h1>
@@ -30,25 +30,38 @@ const CarCard = ({ car }) => {
                 </div>
             </div>
 
-            <div className=' gap-x-20  flex items-center'>
+            <div className='gap-x-4 md:gap-x-20  flex items-center'>
                 <p className='flex  text-black font-semibold items-center'>
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M15 8.25H9m6 3H9m3 6l-3-3h1.5a3 3 0 100-6M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     {rent_price}
                 </p>
-                <button className='bg-gray-500  text-white px-4 py-2 font-semibold'>
-                   
-                    <Link to={`/bookcar/${_id}`}>
-                    Book Now
-                    
-                    </Link>
-                </button>
-                <button className='text-gray-500   border border-gray-500 px-4 py-2 font-semibold'>
-                    <Link to={`/cardetail/${_id}`}>
-                    Details
-                    </Link>
-                </button>
+
+                {
+                    available ?
+
+                        <>
+                            <Link to={`/bookcar/${_id}`}>
+                                <button className='bg-gray-500  text-white px-4 py-2 font-semibold'>
+                                    Book Now
+                                </button>
+                            </Link>
+                        </>
+                        :
+                        <div className='flex flex-col'>
+                            <button className='bg-gray-300  text-white px-4 py-2 font-semibold'>
+                                Book Now
+                            </button>
+                            <label className='text-red-500  text-xs'>Currently Unavailable</label>
+                        </div>
+                }
+                <Link to={`/cardetail/${_id}`}>
+                    <button className='text-gray-500   border border-gray-500 px-4 py-2 font-semibold'>
+
+                        Details
+                    </button>
+                </Link>
             </div>
         </div>
     );

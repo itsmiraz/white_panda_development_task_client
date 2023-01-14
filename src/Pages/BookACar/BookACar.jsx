@@ -4,8 +4,9 @@ import { Link, useLoaderData } from 'react-router-dom';
 import "react-datepicker/dist/react-datepicker.css";
 import { format } from 'date-fns';
 import { da } from 'date-fns/locale';
-import { useAddBookMutation } from '../../Feature/apiSlice';
+import { useAddBookMutation, useGetCarsQuery } from '../../Feature/apiSlice';
 import ConfirmMessage from '../../Components/ConfirmMessage/ConfirmMessage';
+import { toast } from 'react-hot-toast';
 
 const BookACar = () => {
     const data = useLoaderData()
@@ -13,42 +14,50 @@ const BookACar = () => {
     const [ReturnDate, setReturnDate] = useState(null)
     const [openConfirmModal, setOpenConfirmModal] = useState('')
     const [addBook] = useAddBookMutation()
-
+    const getCars = useGetCarsQuery()
     const handleSubmit = (e) => {
         e.preventDefault()
-        const issueDateFormat = format(issueDate, 'PP')
-        const ReturnDateFormat = format(ReturnDate, 'PP')
-        if (issueDateFormat >= ReturnDateFormat) {
-            alert('Please Add A validable retun date')
+        const form = e.target;
+        const contact = form.contact.value
+        // const expr = /^(0|91)?[6-9][0-9]{9}$/;
+        const expr = /^[6-9]\d{9}$/;
+        if (!expr.test(contact)) {
+            toast.error('Please Add A Valid Number')
+            return
         }
         else {
-            const form = e.target;
-            const bookingDetails = {
-                carId: data._id,
-                name: form.name.value,
-                phone: form.contact.value,
-                issueDateFormat,
-                ReturnDateFormat
+            const issueDateTime = issueDate.getTime()
+            const ReturnDateTime = ReturnDate.getTime()
+            const issueDateFormat = format(issueDate, 'PP')
+            const ReturnDateFormat = format(ReturnDate, 'PP')
+            if (issueDateTime >= ReturnDateTime) {
+                return toast.error('Please Add A validable return date')
             }
-            console.log(bookingDetails)
-            // addBook(bookingDetails)
-            setOpenConfirmModal(bookingDetails)
+            else {
+                const bookingDetails = {
+                    carId: data._id,
+                    name: form.name.value,
+                    phone: form.contact.value,
+                    issueDateFormat,
+                    ReturnDateFormat
+                }
+        
+                addBook(bookingDetails)
+                getCars.refetch()
+                setOpenConfirmModal(bookingDetails)
+            }
         }
-
-
-
     }
 
     return (
-        <section className='p-20 grid grid-cols-2 justify-items-center place-items-center'>
+        <section className='px-4 md:px-20 gap-5 py-10 md:py-24  grid grid-col-1 md:grid-cols-2 justify-items-center place-items-center'>
             <div>
-                <img src={ data.img} alt="" />
+                <img className='w-full p-4' src={data.img} alt="" />
             </div>
             <div>
                 <h1 className='font-semibold text-xl'>Booking Details</h1>
-                <form action="" className=' w-[600px]' onSubmit={handleSubmit}>
-
-                    <div className='grid gap-10 font-semibold  grid-cols-2 justify-between items-center w-[600px] my-5'>
+                <form action="" className=' md:w-[600px]' onSubmit={handleSubmit}>
+                    <div className='grid gap-10 font-semibold grid-cols-2 justify-between items-center w-[600px] my-5'>
                         <div>
                             <p className='font-semibold text-xl'>Name</p>
                             <input required name='name' type="text" placeholder='Your Name' className='p-2 border-b-2' />
@@ -82,8 +91,8 @@ const BookACar = () => {
                             ></ReactDatePicker>
                         </div>
                     </div>
-                    <div className='flex pr-10 justify-between'>
-                        <Link to={`/cardetail/${data._id}`} className='px-4 py-2 border border-gray-500 '>Back</Link>
+                    <div className='flex pr-4 md:pr-10 justify-between'>
+                        <Link to={`/`} className='px-4 py-2 border border-gray-500 '>Back</Link>
                         <button type='submit' className='px-4 py-2 font-semibold text-white bg-gray-500'>Submit</button>
                     </div>
                 </form>
