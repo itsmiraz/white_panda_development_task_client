@@ -3,9 +3,7 @@ import React from 'react';
 const Header = () => {
     return (
         <div>
-            <h1 className='text-center text-black'>
-                Rent V Room
-            </h1>
+            <img className='w-24 mx-auto my-4' src="https://i.ibb.co/FqgG3WK/asfas.png" alt="" />
         </div>
     );
 };

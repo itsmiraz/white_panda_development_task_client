@@ -16,7 +16,7 @@ const router = createBrowserRouter([
             },
             {
                 path: '/cardetail/:id',
-                loader:({params})=>fetch(`http://localhost:5000/carDetail/${params.id}`),
+                loader:({params})=>fetch(`https://white-panda-task-server.vercel.app/carDetail/${params.id}`),
                 element:<CarDetails></CarDetails>
             },
            
@@ -26,9 +26,8 @@ const router = createBrowserRouter([
     }
     ,
     {
-
             path: '/bookcar/:id',
-            loader:({params})=>fetch(`http://localhost:5000/carDetail/${params.id}`),
+            loader:({params})=>fetch(`https://white-panda-task-server.vercel.app/carDetail/${params.id}`),
             element:<BookACar></BookACar>
        
     }

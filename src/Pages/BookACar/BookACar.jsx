@@ -56,22 +56,22 @@ const BookACar = () => {
             </div>
             <div>
                 <h1 className='font-semibold text-xl'>Booking Details</h1>
-                <form action="" className=' md:w-[600px]' onSubmit={handleSubmit}>
-                    <div className='grid gap-10 font-semibold grid-cols-2 justify-between items-center w-[600px] my-5'>
+                <form action="" className='w-full md:w-[600px]' onSubmit={handleSubmit}>
+                    <div className='grid gap-10 font-semibold grid-cols-2 justify-between items-center w-full md:w-[600px] my-5'>
                         <div>
                             <p className='font-semibold text-xl'>Name</p>
-                            <input required name='name' type="text" placeholder='Your Name' className='p-2 border-b-2' />
+                            <input required name='name' type="text" placeholder='Your Name' className='p-2 w-full border-b-2' />
                         </div>
                         <div>
                             <p className='font-semibold text-xl'>Contact Number</p>
-                            <input name='contact' required type="text" placeholder='+91' className='p-2 border-b-2' />
+                            <input name='contact' required type="text" placeholder='+91' className='p-2 w-full border-b-2' />
                         </div>
                         <div>
                             <p className='font-semibold text-xl'>Issue Date</p>
                             <ReactDatePicker
                                 selected={issueDate}
                                 onChange={date => setissueDate(date)}
-                                className='rounded p-2 border-b-2 '
+                                className='rounded p-2 w-full border-b-2 '
                                 dateFormat='dd/MM/yyy'
                                 minDate={new Date()}
                                 required
@@ -83,7 +83,7 @@ const BookACar = () => {
                             <ReactDatePicker
                                 selected={ReturnDate}
                                 onChange={date => setReturnDate(date)}
-                                className='rounded p-2 border-b-2 '
+                                className='rounded p-2 w-full border-b-2 '
                                 dateFormat='dd/MM/yyy'
                                 minDate={new Date()}
                                 required
