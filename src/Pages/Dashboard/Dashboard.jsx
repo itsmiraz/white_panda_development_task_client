@@ -1,6 +1,6 @@
 import { castDraft } from 'immer';
 import React from 'react';
-import { useLoaderData } from 'react-router-dom';
+import { ScrollRestoration, useLoaderData } from 'react-router-dom';
 import CarCard from '../../Components/Carcard/CarCard';
 import LoadingAnimation from '../../Components/LoadingAnimation/LoadingAnimation';
 import { useGetCarsQuery } from '../../Feature/apiSlice';
@@ -8,12 +8,14 @@ import { useGetCarsQuery } from '../../Feature/apiSlice';
 const Dashboard = () => {
     const {
         data: cars,
-        isLoading
+        isLoading,
+        isError,error
     } = useGetCarsQuery()
-  
+
     if (isLoading) {
         return <LoadingAnimation></LoadingAnimation>
     }
+  
 
 
     return (
@@ -23,13 +25,15 @@ const Dashboard = () => {
             </h1>
 
             <div className='relative'>
-                <p className='font-semibold absolute md:block hidden left-[350px]'>
+               
+                <p className='font-semibold  text-slate-500 absolute md:block hidden left-[320px] '>
                     Car Detail
                 </p>
-                <p className='font-semibold md:block hidden absolute left-[650px]'>
-                    Rent Per Day
+                <p className='font-semibold text-slate-500 md:block hidden  absolute left-[720px]'>
+                    RENT PER DAY
                 </p>
-                <div className='py-5'>
+
+                <div className='py-5 mt-10 px-2 md:px-20 '>
                     {
 
                         cars.map(car => <CarCard
@@ -41,7 +45,7 @@ const Dashboard = () => {
                     }
                 </div>
             </div>
-
+                    <ScrollRestoration/>
         </section>
     );
 };

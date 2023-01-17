@@ -3,8 +3,8 @@ import { ScaleLoader } from 'react-spinners';
 
 const LoadingAnimation = () => {
     return (
-        <div className='h-[700px] flex justify-center items-center'>
-            <ScaleLoader color="#0044f3" />
+        <div className='h-[600px] flex justify-center items-center'>
+            <ScaleLoader color="#353535" />
 
         </div>
     );

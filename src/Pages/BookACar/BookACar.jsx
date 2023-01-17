@@ -15,6 +15,8 @@ const BookACar = () => {
     const [openConfirmModal, setOpenConfirmModal] = useState('')
     const [addBook] = useAddBookMutation()
     const getCars = useGetCarsQuery()
+   
+   
     const handleSubmit = (e) => {
         e.preventDefault()
         const form = e.target;
@@ -50,28 +52,31 @@ const BookACar = () => {
     }
 
     return (
-        <section className='px-4 md:px-20 gap-5 py-10 md:py-24  grid grid-col-1 md:grid-cols-2 justify-items-center place-items-center'>
-            <div>
-                <img className='w-full p-4' src={data.img} alt="" />
+        <section className='pr-4 md:pr-20   grid grid-col-1 md:grid-cols-3'>
+            <div className='col-span-1'>
+                <img className='w-[440px] ml-0 md:block hidden h-screen' src='https://i.ibb.co/r3CcRy0/415822003.png' alt="" />
             </div>
-            <div>
-                <h1 className='font-semibold text-xl'>Booking Details</h1>
+            <div className='col-span-2 py-28'>
+                <div className='flex justify-between items-center my-12'> 
+                    <h1 className='font-semibold text-xl'>Booking Details</h1>
+                    <img src="https://i.ibb.co/txvtYsJ/rent-Vroom-Logo.jpg" alt="" />
+              </div>
                 <form action="" className='w-full md:w-[600px]' onSubmit={handleSubmit}>
-                    <div className='grid gap-10 font-semibold grid-cols-2 justify-between items-center w-full md:w-[600px] my-5'>
+                    <div className='grid gap-x-32 text-xl justify-items-stretch font-[500] gap-y-20 text-gray-700 grid-cols-2 justify-between items-center w-full md:w-[600px] my-5'>
                         <div>
-                            <p className='font-semibold text-xl'>Name</p>
-                            <input required name='name' type="text" placeholder='Your Name' className='p-2 w-full border-b-2' />
+                            <p>Name</p>
+                            <input required name='name' type="text" placeholder='Your Name' className='px-2 py-2 text-sm border-gray-300  w-full border-b-2' />
                         </div>
                         <div>
-                            <p className='font-semibold text-xl'>Contact Number</p>
-                            <input name='contact' required type="text" placeholder='+91' className='p-2 w-full border-b-2' />
+                            <p>Contact Number</p>
+                            <input name='contact' required type="text" placeholder='+91' className='px-2 py-2 text-sm w-full border-gray-300  border-b-2' />
                         </div>
                         <div>
-                            <p className='font-semibold text-xl'>Issue Date</p>
+                            <p>Issue Date</p>
                             <ReactDatePicker
                                 selected={issueDate}
                                 onChange={date => setissueDate(date)}
-                                className='rounded p-2 w-full border-b-2 '
+                                className='rounded px-2 py-2 w-full text-sm border-gray-300 border-b-2 '
                                 dateFormat='dd/MM/yyy'
                                 minDate={new Date()}
                                 required
@@ -79,11 +84,11 @@ const BookACar = () => {
                             ></ReactDatePicker>
                         </div>
                         <div>
-                            <p className='font-semibold text-xl'>Return Date</p>
+                            <p>Return Date</p>
                             <ReactDatePicker
                                 selected={ReturnDate}
                                 onChange={date => setReturnDate(date)}
-                                className='rounded p-2 w-full border-b-2 '
+                                className='rounded px-2 py-2 w-full border-gray-300  text-sm border-b-2 '
                                 dateFormat='dd/MM/yyy'
                                 minDate={new Date()}
                                 required
@@ -91,9 +96,9 @@ const BookACar = () => {
                             ></ReactDatePicker>
                         </div>
                     </div>
-                    <div className='flex pr-4 md:pr-10 justify-between'>
-                        <Link to={`/`} className='px-4 py-2 border border-gray-500 '>Back</Link>
-                        <button type='submit' className='px-4 py-2 font-semibold text-white bg-gray-500'>Submit</button>
+                    <div className='flex my-10 justify-between'>
+                        <Link to={`/`} className='px-4 py-2 font-semibold '>Back</Link>
+                        <button type='submit' className='px-4 py-2 rounded font-semibold text-white bg-gray-500'>Book Car</button>
                     </div>
                 </form>
             </div>
@@ -104,7 +109,7 @@ const BookACar = () => {
                         bookedCar={data}
                         openConfirmModal={openConfirmModal}
                     ></ConfirmMessage>
-                    <div className='w-full h-screen bg-black/50 z-10 absolute top-0'>
+                    <div className='w-full h-screen bg-black/30 z-10 absolute top-0'>
 
                     </div>
                 </>

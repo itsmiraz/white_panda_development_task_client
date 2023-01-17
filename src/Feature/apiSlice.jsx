@@ -1,26 +1,42 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
-import {createApi, fetchBaseQuery} from'@reduxjs/toolkit/query/react'
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 export const apiSlice = createApi({
     reducerPath: 'api',
-    baseQuery: fetchBaseQuery({ baseUrl: 'https://white-panda-task-server.vercel.app' }),
-tagTypes:['cars'],
-  
+    baseQuery: fetchBaseQuery({ baseUrl: ' https://white-panda-task-server.vercel.app' }),
+    tagTypes: ['cars'],
+
     endpoints: (builder) => ({
         getCars: builder.query({
             query: () => '/cars',
-            providesTags:['cars']
+            providesTags: ['cars']
         }),
+
         addBook: builder.mutation({
             query: (bookDetasils) => ({
                 url: `/addbooking/${bookDetasils.carId}`,
                 method: 'PUT',
-                body:bookDetasils
+                body: bookDetasils
             }),
-            invalidatesTags:['cars']
+            invalidatesTags: ['cars']
+        }),
+        updateBookingDetails: builder.mutation({
+            query: (details) => ({
+                url: `/updatebooking/${details.carId}`,
+                method: 'PUT',
+                body: details
+
+            })
+        }),
+        deleteBook: builder.mutation({
+            query: ({ id }) => ({
+                url: `/deletebooking/${id}`,
+                method: 'DELETE'
+            }),
+            invalidatesTags: ['deletebook']
         })
-        
+
     })
 
 
@@ -28,6 +44,8 @@ tagTypes:['cars'],
 
 export const {
     useGetCarsQuery,
-    useAddBookMutation
+useUpdateBookingDetailsMutation,
+    useAddBookMutation,
+    useDeleteBookMutation
 } = apiSlice
 
