@@ -27,14 +27,15 @@ export const apiSlice = createApi({
                 method: 'PUT',
                 body: details
 
-            })
+            }),
+            invalidatesTags:['cars']
         }),
         deleteBook: builder.mutation({
             query: ({ id }) => ({
                 url: `/deletebooking/${id}`,
                 method: 'DELETE'
             }),
-            invalidatesTags: ['deletebook']
+            invalidatesTags: ['cars']
         })
 
     })

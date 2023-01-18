@@ -7,7 +7,9 @@ import { useDeleteBookMutation, useGetCarsQuery, useUpdateBookingDetailsMutation
 import { toast } from 'react-hot-toast';
 import ReactDatePicker from 'react-datepicker';
 import { format } from 'date-fns';
-import { tr } from 'date-fns/locale';
+
+
+
 const CarDetails = () => {
     const data = useLoaderData()
     const [edit, setEdit] = useState(true)
